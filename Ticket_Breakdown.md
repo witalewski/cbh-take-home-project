@@ -28,7 +28,7 @@ Create indices to ensure that the following pairs are always unique:
 - agent_id and facility_id (each Facility can only have a single custom id for each Agent)
 - facility_id and custom_agent_id (Facilities can't reuse the same custom id for multiple Agents)
 
-It should be possible for 2 different Facilities to use the same custom id (for either the same or different Agents) or to assign their own different IDs to the same agent.
+It should be possible for 2 different Facilities to either both use the same id for the same agent or each have their own id for the same agent.
 
 E.g. these should be allowed:
 
