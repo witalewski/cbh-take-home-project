@@ -15,14 +15,14 @@ exports.deterministicPartitionKey = (event) => {
     return calculateHash(JSON.stringify(event));
   }
 
-  let candidate = event.partitionKey;
-
-  if (typeof candidate !== "string") {
-    candidate = JSON.stringify(candidate);
-  }
+  const candidate =
+    typeof event.partitionKey === "string"
+      ? event.partitionKey
+      : JSON.stringify(event.partitionKey);
 
   if (candidate.length > MAX_PARTITION_KEY_LENGTH) {
-    candidate = calculateHash(candidate);
+    return calculateHash(candidate);
   }
+
   return candidate;
 };
