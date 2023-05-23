@@ -11,14 +11,11 @@ exports.deterministicPartitionKey = (event) => {
     return TRIVIAL_PARTITION_KEY;
   }
 
-  let candidate;
-
-  if (event.partitionKey) {
-    candidate = event.partitionKey;
-  } else {
-    const data = JSON.stringify(event);
-    candidate = calculateHash(data);
+  if (!event.partitionKey) {
+    return calculateHash(JSON.stringify(event));
   }
+
+  let candidate = event.partitionKey;
 
   if (typeof candidate !== "string") {
     candidate = JSON.stringify(candidate);
